@@ -10,3 +10,4 @@ require("plugins.lsp")    -- LSP configurations
 require("plugins.cmp")    -- Autocompletion setup
 require("plugins.themes") -- Theme configurations
 require("plugins.clipboard") -- Clipboard setup
+

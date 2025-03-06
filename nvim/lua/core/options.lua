@@ -6,7 +6,7 @@ vim.g.mapleader = " "
 -- General settings
 vim.o.number = true                -- Show line numbers
 vim.o.cursorline = false           -- line Highlight
-vim.o.relativenumber = false       -- Disable relative line numbers (static line numbers)
+vim.o.relativenumber = true       -- Disable relative line numbers (static line numbers)
 vim.o.smartcase = true             -- Smart case matching
 vim.o.ignorecase = true            -- Ignore case in search
 vim.o.tabstop = 4                  -- Number of spaces for a tab

@@ -1,16 +1,16 @@
--- ~/.config/nvim/lua/plugins/lsp.lua
 
 local lspconfig = require('lspconfig')
-local null_ls = require("null-ls")
+-- null-ls import removed - incompatible with Neovim v0.11.0-dev
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 -- Global on_attach and capabilities
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
+  -- Mappings
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
 
   if vim.lsp.buf.declaration then
@@ -68,12 +68,12 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Mason setup
 mason.setup()
 mason_lspconfig.setup({
-  ensure_installed = { "ts_ls", "html", "cssls", "eslint", "pyright" }, -- ✅ Updated server names
+  ensure_installed = { "ts_ls", "html", "cssls", "eslint", "pyright", "clangd" },
 })
 
 -- Python (using pyright)
@@ -86,17 +86,12 @@ lspconfig.pyright.setup{
 lspconfig.ts_ls.setup{
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
 }
 
--- ESLint (using null-ls)
-null_ls.setup({
-  sources = {
-    null_ls.builtins.diagnostics.eslint, -- ESLint diagnostics
-    null_ls.builtins.formatting.eslint,  -- ESLint formatting
-  },
-  on_attach = on_attach,
-})
+-- NOTE: null-ls has been completely disabled due to incompatibility with Neovim v0.11.0-dev
+-- The error occurs because null-ls tries to access '_request_name_to_capability' which is nil
+-- Consider using native LSP formatting instead
 
 -- HTML
 lspconfig.html.setup{
@@ -109,3 +104,10 @@ lspconfig.cssls.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 }
+
+-- C++ (using clangd)
+lspconfig.clangd.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
