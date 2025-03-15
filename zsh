@@ -1,1 +1,0 @@
-/home/abdirahman/dotfiles/config/zsh

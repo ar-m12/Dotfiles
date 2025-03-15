@@ -1,0 +1,19 @@
+
+# Basic Zsh Config
+export ZSH_CONFIG_DIR="$HOME/.config/zsh"
+
+# History Settings
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE="$HOME/.zsh_history"
+
+# Prompt
+PROMPT='%F{green}%n@%m%f:%F{blue}%~%f\$ '
+
+# Enable completion
+autoload -Uz compinit
+compinit
+
+# Aliases
+alias ll='ls -lah'
+alias gs='git status'
