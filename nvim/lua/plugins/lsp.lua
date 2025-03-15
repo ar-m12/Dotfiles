@@ -73,7 +73,7 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 -- Mason setup
 mason.setup()
 mason_lspconfig.setup({
-  ensure_installed = { "ts_ls", "html", "cssls", "eslint", "pyright", "clangd" },
+  ensure_installed = { "ts_ls", "html", "cssls", "eslint", "pyright", "clangd", "gopls" },
 })
 
 -- Python (using pyright)

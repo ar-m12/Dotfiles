@@ -27,9 +27,27 @@ require("lazy").setup({
     config = function()
       require("nvim-tree").setup({
         view = { width = 30 },
+        renderer = {
+          add_trailing = true,  -- This adds a trailing slash (/) to folders
+          icons = {
+            show = {
+              file = false,
+              folder = false,
+              folder_arrow = false,
+              git = false,
+            }
+          }
+        }
       })
     end
   },
+
+
+    {"supermaven-inc/supermaven-nvim",
+      config = function()
+        require("supermaven-nvim").setup({})
+      end,
+    },
 
   -- git signs
   { "lewis6991/gitsigns.nvim",
@@ -46,7 +64,7 @@ require("lazy").setup({
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "lua", "javascript", "typescript", "html", "css", "python",
-          "bash", "json", "yaml", "markdown"
+          "bash", "json", "yaml", "markdown", "go", "zig"
         },
         sync_install = false, -- Install parsers asynchronously
         auto_install = true,  -- Auto-install missing parsers
@@ -200,7 +218,7 @@ require("lazy").setup({
   { "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "clangd" },
+        ensure_installed = { "clangd", "gopls", "zls" },
       })
     end
   },
@@ -212,11 +230,22 @@ require("lazy").setup({
   { "alvan/vim-closetag" },
 })
 
--- LSP Setup for clangd
+-- LSP Setup for clangd, gopls, and zls
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
+-- Clangd for C/C++
 lspconfig.clangd.setup({
+  capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+})
+
+-- Gopls for Go
+lspconfig.gopls.setup({
+  capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+})
+
+-- Zls for Zig
+lspconfig.zls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
 })
 
