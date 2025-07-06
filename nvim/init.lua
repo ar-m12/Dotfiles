@@ -1,5 +1,5 @@
 -- ~/.config/nvim/init.lua
-
+vim.keymap.set("n", "<C-t>", "<Nop>", { noremap = true }) -- Unmap default first
 -- Load core settings
 require("core.options")   -- General Neovim settings
 require("core.keymaps")   -- Key mappings

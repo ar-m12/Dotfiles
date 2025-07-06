@@ -10,7 +10,6 @@ vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true }
 vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true })  -- List buffers with Telescope
 vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { noremap = true })  -- List help tags with Telescope
 
-
 -- Map Ctrl+Backspace to delete the previous word in insert mode
 vim.keymap.set('i', '<C-h>', '<C-w>', { noremap = true })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { noremap = true })

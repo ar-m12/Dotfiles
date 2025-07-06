@@ -18,15 +18,10 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources({
-    { name = 'copilot' }, -- GitHub Copilot source
     { name = 'nvim_lsp' },
     { name = 'luasnip' }, -- Add LuaSnip as a source
     { name = 'buffer' },
     { name = 'path' },
   }),
 })
-
--- Copilot integration setup
-require("copilot").setup({})
-require("copilot_cmp").setup()
 

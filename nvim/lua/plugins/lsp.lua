@@ -73,8 +73,9 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 -- Mason setup
 mason.setup()
 mason_lspconfig.setup({
-  ensure_installed = { "ts_ls", "html", "cssls", "eslint", "pyright", "clangd", "gopls" },
+  ensure_installed = { "ts_ls", "html", "cssls", "eslint", "pyright", "clangd", "gopls", "tailwindcss" },
 })
+
 
 -- Python (using pyright)
 lspconfig.pyright.setup{
@@ -111,3 +112,26 @@ lspconfig.clangd.setup{
   capabilities = capabilities,
 }
 
+
+lspconfig.tailwindcss.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {
+    "html",
+    "css",
+    "scss",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "svelte",
+  },
+  init_options = {
+    userLanguages = {
+      eelixir = "html",
+      eruby = "html",
+      heex = "html"
+    }
+  }
+}
